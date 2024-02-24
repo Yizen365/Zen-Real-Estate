@@ -1,8 +1,10 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import {FaSearch} from 'react-icons/fa'
+import { useSelector } from 'react-redux'
 
 const NavBar = () => {
+    const {user} = useSelector((state)=> state.user);
   return (
     <header className="bg-slate-400 p-4">
         <div className="flex items-center justify-between max-w-7xl m-auto">
@@ -19,7 +21,9 @@ const NavBar = () => {
             <ul className="flex gap-7 text-sm sm:text-lg">
                 <NavLink className="hidden sm:inline" to={'/'}><li>Home</li></NavLink>
                 <NavLink className="hidden sm:inline" to={'/about'}><li>About</li></NavLink>
-                <NavLink to={'/signup'}><li>Sign Up</li></NavLink>
+                <NavLink to={'/profile'}>
+                    {user ? <img className="w-7 h-7 rounded-full object-cover" src={user.avatar} alt="profile" /> : <li>Sign In</li>}
+                </NavLink>
             </ul>
         </div>
     </header>
